@@ -762,7 +762,6 @@
             "xz"
         ],
         "lib-suggests-windows": [
-            "zstd",
             "openssl"
         ]
     },

@@ -180,13 +180,6 @@ jobs:
       - name: "Run Build Tests (doctor)"
         run: php src/globals/test-extensions.php doctor_cmd ${{ matrix.os }} ${{ matrix.php }}
 
-      - name: "ACLOCAL"
-        run: |
-          ls -lah /opt/homebrew/share/aclocal
-          autoconf --version
-          aclocal --print-ac-dir
-          echo $ACLOCAL_PATH
-
       - name: "Prepare UPX for Windows"
         if: ${{ startsWith(matrix.os, 'windows-') }}
         run: |
@@ -216,6 +209,6 @@ jobs:
           name: build-logs-${{ matrix.os }}-${{ matrix.php }}
           path: log
 
-#      - name: Setup tmate session
-#        if: ${{ failure() }}
-#        uses: mxschmitt/action-tmate@v3
+      - name: Setup tmate session
+        if: ${{ failure() }}
+        uses: mxschmitt/action-tmate@v3

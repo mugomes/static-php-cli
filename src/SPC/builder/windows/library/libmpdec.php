@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace SPC\builder\windows\library;
 
-use SPC\store\FileSystem;
-
 class libmpdec extends WindowsLibraryBase
 {
     public const NAME = 'libmpdec';

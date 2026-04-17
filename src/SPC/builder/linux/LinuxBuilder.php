@@ -65,7 +65,8 @@ class LinuxBuilder extends UnixBuilderBase
             // php 8.5 contains opcache extension by default,
             // if opcache_jit is enabled for 8.5 or opcache enabled,
             // we need to disable undefined behavior sanitizer.
-            f_putenv('SPC_COMPILER_EXTRA=-fno-sanitize=undefined');
+            $compiler_extra = getenv('SPC_COMPILER_EXTRA') ?: '';
+            f_putenv('SPC_COMPILER_EXTRA=' . trim($compiler_extra . ' -fno-sanitize=undefined'));
         }
 
         if ($this->getOption('enable-zts', false)) {

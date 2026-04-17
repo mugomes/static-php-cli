@@ -233,8 +233,7 @@ class Extension
         if (preg_match('/^(.*_SHARED_LIBADD\s*=\s*)(.*)$/m', $makefileContent, $matches)) {
             $prefix = $matches[1];
             $currentLibs = trim($matches[2]);
-            $lzig = ToolchainManager::getToolchainClass() === ZigToolchain::class ? '-lcompiler_rt -lunwind' : '';
-            $newLibs = clean_spaces("{$currentLibs} {$staticLibs} {$lstdcpp} {$lzig}");
+            $newLibs = clean_spaces("{$currentLibs} {$staticLibs} {$lstdcpp}");
             $deduplicatedLibs = deduplicate_flags($newLibs);
 
             FileSystem::replaceFileRegex(

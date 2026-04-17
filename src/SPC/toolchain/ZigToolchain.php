@@ -64,6 +64,12 @@ class ZigToolchain implements ToolchainInterface
             $extra_libs = trim($extra_libs . ' -lunwind');
             GlobalEnvManager::putenv("SPC_EXTRA_LIBS={$extra_libs}");
         }
+        $compiler_extra = getenv('SPC_COMPILER_EXTRA') ?: '';
+        if (!str_contains($compiler_extra, '-lcompiler_rt')) {
+            // Add unwind library if not already present
+            $compiler_extra = trim($compiler_extra . ' -lcompiler_rt');
+            GlobalEnvManager::putenv("SPC_COMPILER_EXTRA={$compiler_extra}");
+        }
         $cflags = getenv('SPC_DEFAULT_C_FLAGS') ?: getenv('CFLAGS') ?: '';
         $has_avx512 = str_contains($cflags, '-mavx512') || str_contains($cflags, '-march=x86-64-v4');
         if (!$has_avx512) {
